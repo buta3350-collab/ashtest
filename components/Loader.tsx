@@ -12,7 +12,12 @@ export default function Loader() {
       setTimeout(() => {
         const loader = document.getElementById('loader')
         if (loader) loader.classList.add('out')
-        document.body.style.overflow = ''
+        if (fromTransition || window.location.pathname !== '/') {
+          document.body.style.overflow = ''
+        } else {
+          // Keep overflow hidden — SplashChoice takes over after loader fade
+          setTimeout(() => window.dispatchEvent(new Event('loader-choice')), 960)
+        }
       }, duration)
     }
     if (document.readyState === 'complete') onLoad()

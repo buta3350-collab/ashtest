@@ -12,6 +12,7 @@ import Footer from '@/components/sections/Footer'
 import BookingModal from '@/components/BookingModal'
 import PageTransition from '@/components/PageTransition'
 import ClientInit from '@/components/ClientInit'
+import SplashChoice from '@/components/SplashChoice'
 
 export default function Home() {
   return (
@@ -39,6 +40,7 @@ export default function Home() {
       <BookingModal />
       <PageTransition />
       <ClientInit />
+      <SplashChoice />
     </>
   )
 }
