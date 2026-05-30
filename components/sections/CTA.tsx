@@ -40,6 +40,11 @@ export default function CTA() {
 
           {/* ── Manifesto column ───────────────────────────── */}
           <div className="cta-manifest reveal-left">
+            <div className="section-num reveal">
+              <span className="section-num-no">07</span>
+              <span className="section-num-line" />
+              <span className="section-num-label">Kontakt</span>
+            </div>
             <h2 className="cta-h2">
               Kontakt aufnehmen.
               <span className="h2-sub">Per Telefon, E-Mail oder über das Formular rechts.</span>

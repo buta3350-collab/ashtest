@@ -13,6 +13,7 @@ import BookingModal from '@/components/BookingModal'
 import PageTransition from '@/components/PageTransition'
 import ClientInit from '@/components/ClientInit'
 import SplashChoice from '@/components/SplashChoice'
+import SectionIndicator from '@/components/SectionIndicator'
 
 export default function Home() {
   return (
@@ -41,6 +42,7 @@ export default function Home() {
       <PageTransition />
       <ClientInit />
       <SplashChoice />
+      <SectionIndicator />
     </>
   )
 }

@@ -6,6 +6,11 @@ export default async function Services() {
     <section id="services" aria-label="Unsere Leistungen">
       <div className="svc-shell">
 
+        <div className="section-num reveal">
+          <span className="section-num-no">04</span>
+          <span className="section-num-line" />
+          <span className="section-num-label">Leistungen</span>
+        </div>
         <h2 className="svc-section-h2 reveal">
           Leistungen.
           <span className="h2-sub">Fahrzeugpflege und Autocenter.</span>

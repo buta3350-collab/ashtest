@@ -42,6 +42,11 @@ export default function Process() {
     <section id="process">
       <div className="proc-shell">
 
+        <div className="section-num reveal">
+          <span className="section-num-no">05</span>
+          <span className="section-num-line" />
+          <span className="section-num-label">Ablauf</span>
+        </div>
         <h2 className="proc-h2 reveal">
           In drei Schritten.
           <span className="h2-sub">So läuft Ihr Termin bei uns ab.</span>

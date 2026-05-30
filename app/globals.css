@@ -6891,6 +6891,107 @@ input.sr-only{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
 
 html.light #splash-choice{background:var(--black)}
 
+/* ══════════════════════════════════════════════════════════
+   SECTION NUMBER EYEBROW — über jeder Section-Headline
+   ══════════════════════════════════════════════════════════ */
+.section-num{
+  display:flex;align-items:center;gap:.8rem;
+  margin-bottom:1.4rem;
+  font-family:'Syncopate',sans-serif;
+  font-size:.58rem;font-weight:400;
+  letter-spacing:.32em;text-transform:uppercase;
+  line-height:1;
+}
+.section-num-no{
+  color:var(--red);font-weight:700;
+  letter-spacing:.18em;
+  font-family:'Ethnocentric',sans-serif;
+  font-size:.7rem;
+}
+.section-num-line{
+  width:42px;height:1px;
+  background:linear-gradient(to right,var(--red),rgba(227,6,19,.15));
+  flex-shrink:0;
+}
+.section-num-label{color:rgba(255,255,255,.5)}
+html.light .section-num-label{color:rgba(0,0,0,.5)}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION INDICATOR — sticky rechte Seitennavigation
+   ══════════════════════════════════════════════════════════ */
+.section-indicator{
+  position:fixed;
+  right:1.6rem;top:50%;
+  transform:translateY(-50%);
+  z-index:60;
+  display:flex;flex-direction:column;
+  gap:.85rem;
+  opacity:0;pointer-events:none;
+  transition:opacity .5s ease;
+}
+.section-indicator.si-show{opacity:1;pointer-events:auto}
+
+.si-item{
+  display:flex;align-items:center;
+  justify-content:flex-end;
+  gap:.6rem;
+  text-decoration:none;
+  font-family:'Syncopate',sans-serif;
+  font-size:.52rem;font-weight:400;
+  letter-spacing:.28em;text-transform:uppercase;
+  cursor:pointer;
+  color:rgba(255,255,255,.35);
+  transition:color .3s;
+}
+.si-label{
+  opacity:0;
+  transform:translateX(6px);
+  transition:opacity .3s,transform .35s var(--ease),color .3s;
+  white-space:nowrap;
+  color:rgba(255,255,255,.55);
+}
+.si-tick{
+  display:block;width:18px;height:1px;
+  background:rgba(255,255,255,.22);
+  transition:width .35s var(--ease),background .3s;
+  flex-shrink:0;
+}
+.si-no{
+  font-family:'Ethnocentric',sans-serif;
+  font-size:.55rem;letter-spacing:.12em;
+  color:rgba(255,255,255,.28);
+  width:1.8em;text-align:left;
+  transition:color .3s;
+}
+.si-item:hover{color:rgba(255,255,255,.85)}
+.si-item:hover .si-label{opacity:1;transform:translateX(0);color:rgba(255,255,255,.9)}
+.si-item:hover .si-tick{width:26px;background:rgba(255,255,255,.55)}
+.si-item:hover .si-no{color:rgba(255,255,255,.7)}
+
+.si-item.active .si-label{
+  opacity:1;transform:translateX(0);
+  color:var(--white);
+}
+.si-item.active .si-tick{
+  width:32px;background:var(--red);
+  box-shadow:0 0 8px rgba(227,6,19,.5);
+}
+.si-item.active .si-no{color:var(--red)}
+
+/* Light mode */
+html.light .si-label{color:rgba(0,0,0,.55)}
+html.light .si-tick{background:rgba(0,0,0,.2)}
+html.light .si-no{color:rgba(0,0,0,.3)}
+html.light .si-item:hover .si-label{color:rgba(0,0,0,.9)}
+html.light .si-item:hover .si-tick{background:rgba(0,0,0,.5)}
+html.light .si-item:hover .si-no{color:rgba(0,0,0,.7)}
+html.light .si-item.active .si-label{color:#1c1714}
+
+/* Hide on smaller screens — gets in the way of mobile content */
+@media(max-width:1024px){
+  .section-indicator{display:none}
+}
+
 /* ── Global eyebrow/label readability bump ─────────────── */
 .about-rule-label,
 .svc-rule-label,

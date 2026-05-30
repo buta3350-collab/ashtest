@@ -5,6 +5,11 @@ export default function CEO() {
     <section id="ceo" aria-label="Über den Geschäftsführer">
       <div className="ceo-shell">
 
+        <div className="section-num reveal">
+          <span className="section-num-no">02</span>
+          <span className="section-num-line" />
+          <span className="section-num-label">Meister</span>
+        </div>
         <div className="ceo-rule reveal" aria-hidden="true">
           <span className="ceo-rule-line" />
           <span className="ceo-rule-label">Geschäftsführer &amp; Inhaber</span>

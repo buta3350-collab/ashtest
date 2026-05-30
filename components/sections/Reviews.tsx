@@ -8,6 +8,11 @@ export default function Reviews() {
         <div className="rev-hero">
 
           <div className="rev-hero-text reveal-left">
+            <div className="section-num reveal">
+              <span className="section-num-no">06</span>
+              <span className="section-num-line" />
+              <span className="section-num-label">Stimmen</span>
+            </div>
             <h2 className="rev-h2">
               Kundenstimmen.
               <span className="h2-sub">Ungekürzt aus Google Maps.</span>
