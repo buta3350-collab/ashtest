@@ -7729,8 +7729,8 @@ html.light #vehicles{
     #828289 0%,
     #9d9da6 4%,
     #b4b4bc 9%,
-    var(--sec-lb) 16%,
-    var(--sec-lb) 60%,
+    #c6c6cd 16%,
+    #c6c6cd 60%,
     var(--sec-lc) 100%) !important;
 }
 html.light #autocenter{
