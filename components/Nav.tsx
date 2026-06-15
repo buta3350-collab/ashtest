@@ -15,10 +15,10 @@ const NAV_ITEMS = [
   },
   {
     label: 'Leistungen',
-    href: '#services',
+    href: '#vehicles',
     sub: [
-      { label: 'Gebrauchtwagenhandel',  sub: 'Geprüfter Bestand in Wolfsberg',  href: '/verkauf'  },
-      { label: 'Reinigung & Versiegelung', sub: 'Lackpflege & Keramikversiegelung', href: '#reinigung' },
+      { label: 'Autocenter',           sub: 'Geprüfter Bestand in Wolfsberg',    href: '#autocenter' },
+      { label: 'Reinigung & Versiegelung', sub: 'Lackpflege & Keramikversiegelung', href: '#pflege' },
     ],
   },
   { label: 'Bewertungen', href: '#reviews' },

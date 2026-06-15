@@ -2,13 +2,14 @@
 import { useEffect, useState } from 'react'
 
 const SECTIONS = [
-  { id: 'about',    no: '01', label: 'Standort' },
-  { id: 'ceo',      no: '02', label: 'Meister' },
-  { id: 'vehicles', no: '03', label: 'Fahrzeuge' },
-  { id: 'services', no: '04', label: 'Leistungen' },
-  { id: 'process',  no: '05', label: 'Ablauf' },
-  { id: 'reviews',  no: '06', label: 'Stimmen' },
-  { id: 'cta',      no: '07', label: 'Kontakt' },
+  { id: 'vehicles',   no: '02', label: 'Bereiche' },
+  { id: 'autocenter', no: '03', label: 'Autocenter' },
+  { id: 'pflege',     no: '04', label: 'Pflege' },
+  { id: 'process',    no: '05', label: 'Ablauf' },
+  { id: 'about',      no: '06', label: 'Standort' },
+  { id: 'ceo',        no: '07', label: 'Inhaber' },
+  { id: 'reviews',    no: '08', label: 'Stimmen' },
+  { id: 'cta',        no: '09', label: 'Kontakt' },
 ] as const
 
 export default function SectionIndicator() {

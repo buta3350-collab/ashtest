@@ -261,7 +261,7 @@ export default function CarDetailModal({ car, allCars, onClose, onBook, onCarSel
   const shareToastRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   function handleShare() {
-    const url = `${window.location.origin}/verkauf?car=${car.id}`
+    const url = `${window.location.origin}/?car=${car.id}#autocenter`
     if (typeof navigator !== 'undefined' && navigator.share) {
       navigator.share({ title: car.title, url }).catch(() => {})
     } else {

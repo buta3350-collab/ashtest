@@ -86,9 +86,9 @@ export default function Vehicles() {
 
           <div className="veh-hero-text reveal-left">
             <div className="section-num reveal">
-              <span className="section-num-no">03</span>
+              <span className="section-num-no">02</span>
               <span className="section-num-line" />
-              <span className="section-num-label">Fahrzeuge</span>
+              <span className="section-num-label">Bereiche</span>
             </div>
             <h2 className="veh-h2">
               Zwei Bereiche.

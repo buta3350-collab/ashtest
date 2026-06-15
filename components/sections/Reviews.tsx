@@ -9,7 +9,7 @@ export default function Reviews() {
 
           <div className="rev-hero-text reveal-left">
             <div className="section-num reveal">
-              <span className="section-num-no">06</span>
+              <span className="section-num-no">08</span>
               <span className="section-num-line" />
               <span className="section-num-label">Stimmen</span>
             </div>

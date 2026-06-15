@@ -2,19 +2,14 @@ import Image from 'next/image'
 
 export default function CEO() {
   return (
-    <section id="ceo" aria-label="Über den Geschäftsführer">
+    <section id="ceo" aria-label="Geschäftsführer und Historie">
       <div className="ceo-shell">
 
         <div className="section-num reveal">
-          <span className="section-num-no">02</span>
+          <span className="section-num-no">07</span>
           <span className="section-num-line" />
-          <span className="section-num-label">Meister</span>
+          <span className="section-num-label">Geschäftsführer</span>
         </div>
-        <div className="ceo-rule reveal" aria-hidden="true">
-          <span className="ceo-rule-line" />
-          <span className="ceo-rule-label">Geschäftsführer &amp; Inhaber</span>
-        </div>
-
         <div className="ceo-comp">
 
           {/* ── Portrait column ────────────────────────────── */}
@@ -88,6 +83,67 @@ export default function CEO() {
 
           </div>
         </div>
+
+        {/* ── Historie ─────────────────────────────────────── */}
+        <div className="ceo-history reveal">
+          <div className="ceo-history-head" aria-hidden="true">
+            <span className="ceo-history-head-line" />
+            <span className="ceo-history-head-label">Historie</span>
+            <span className="ceo-history-head-line" />
+          </div>
+
+          <ol className="ceo-history-timeline" aria-label="Meilensteine">
+            <li className="ceo-history-item reveal d1">
+              <div className="ceo-history-year">2004</div>
+              <div className="ceo-history-dot" aria-hidden="true" />
+              <div className="ceo-history-body">
+                <h4 className="ceo-history-title">Eröffnung am Drosselweg</h4>
+                <p className="ceo-history-text">
+                  Gründung des Betriebs in Wolfsberg.
+                  Fahrzeugpflege und Gebrauchtwagenhandel von Anfang an
+                  unter einem Dach.
+                </p>
+              </div>
+            </li>
+
+            <li className="ceo-history-item reveal d2">
+              <div className="ceo-history-year">Werdegang</div>
+              <div className="ceo-history-dot" aria-hidden="true" />
+              <div className="ceo-history-body">
+                <h4 className="ceo-history-title">Meisterprüfung</h4>
+                <p className="ceo-history-text">
+                  Behar Shabani absolviert das Handwerk von Grund auf und
+                  legt im Laufe der Jahre die Meisterprüfung ab.
+                </p>
+              </div>
+            </li>
+
+            <li className="ceo-history-item reveal d3">
+              <div className="ceo-history-year">Konstanz</div>
+              <div className="ceo-history-dot" aria-hidden="true" />
+              <div className="ceo-history-body">
+                <h4 className="ceo-history-title">Zwei Bereiche, ein Standort</h4>
+                <p className="ceo-history-text">
+                  Beide Bereiche werden seither persönlich vom Meister
+                  geführt — keine Subaufträge, keine Filialen.
+                </p>
+              </div>
+            </li>
+
+            <li className="ceo-history-item reveal d4">
+              <div className="ceo-history-year">Heute</div>
+              <div className="ceo-history-dot ceo-history-dot-now" aria-hidden="true" />
+              <div className="ceo-history-body">
+                <h4 className="ceo-history-title">22<sup>+</sup> Jahre am Drosselweg</h4>
+                <p className="ceo-history-text">
+                  Inhabergeführt, am ursprünglichen Standort.
+                  Familienbetrieb in Wolfsberg, Kärnten.
+                </p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
       </div>
     </section>
   )

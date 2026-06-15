@@ -9,7 +9,7 @@ export default function About() {
         <div className="about-hero">
           <div className="about-hero-text reveal-left">
             <div className="section-num reveal">
-              <span className="section-num-no">01</span>
+              <span className="section-num-no">06</span>
               <span className="section-num-line" />
               <span className="section-num-label">Standort</span>
             </div>

@@ -41,7 +41,7 @@ export default function CTA() {
           {/* ── Manifesto column ───────────────────────────── */}
           <div className="cta-manifest reveal-left">
             <div className="section-num reveal">
-              <span className="section-num-no">07</span>
+              <span className="section-num-no">09</span>
               <span className="section-num-line" />
               <span className="section-num-label">Kontakt</span>
             </div>

@@ -23,10 +23,11 @@ export default function Footer() {
         <div className="footer-col">
           <h5>Navigation</h5>
           <ul>
-            <li><a href="#services">Leistungen</a></li>
-            <li><a href="#about">Über uns</a></li>
+            <li><a href="#autocenter">Autocenter</a></li>
+            <li><a href="#pflege">Fahrzeugpflege</a></li>
+            <li><a href="#ceo">Über uns</a></li>
             <li><a href="#reviews">Bewertungen</a></li>
-            <li><a href="#cta">Termin buchen</a></li>
+            <li><a href="#cta">Kontakt</a></li>
           </ul>
         </div>
         <div className="footer-col">

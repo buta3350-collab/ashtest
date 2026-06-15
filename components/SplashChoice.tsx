@@ -15,14 +15,14 @@ export default function SplashChoice() {
   function choose(dest: 'main' | 'autocenter') {
     if (exiting) return
     setExiting(true)
-    if (dest === 'autocenter') {
-      setTimeout(() => { window.location.href = '/verkauf' }, 650)
-    } else {
-      setTimeout(() => {
-        setVisible(false)
-        document.body.style.overflow = ''
-      }, 650)
-    }
+    setTimeout(() => {
+      setVisible(false)
+      document.body.style.overflow = ''
+      if (dest === 'autocenter') {
+        const el = document.getElementById('autocenter')
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }, 650)
   }
 
   function handleKey(e: React.KeyboardEvent, dest: 'main' | 'autocenter') {

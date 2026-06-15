@@ -20,7 +20,7 @@ export default function Hero() {
         </p>
 
         <div className="hero-actions">
-          <a href="#services" className="hero-btn-primary">
+          <a href="#vehicles" className="hero-btn-primary">
             <span>Leistungen entdecken</span>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M5 12h14M12 5l7 7-7 7" />
@@ -30,6 +30,13 @@ export default function Hero() {
             <span>Kontakt aufnehmen</span>
           </a>
         </div>
+
+        <a href="#vehicles" className="hero-scroll" aria-label="Weiter zur Übersicht scrollen">
+          <span className="hero-scroll-label">Runter scrollen</span>
+          <svg className="hero-scroll-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>
+        </a>
 
       </div>
 
@@ -84,13 +91,6 @@ export default function Hero() {
           </div>
         </div>
       </aside>
-
-      <a href="#about" className="hero-scroll" aria-label="Weiter zur Übersicht scrollen">
-        <span className="hero-scroll-label">Runter scrollen</span>
-        <span className="hero-scroll-tube" aria-hidden="true">
-          <span className="hero-scroll-drop" />
-        </span>
-      </a>
 
     </section>
   )
