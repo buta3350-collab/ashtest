@@ -2306,10 +2306,11 @@ html.light .legal-table code{background:rgba(0,0,0,.06)}
   padding:0 4px;
 }
 .ceo-history-year{
-  font-family:'Ethnocentric',sans-serif;
-  font-size:1.4rem;letter-spacing:.04em;line-height:1;
+  font-family:'Syncopate',sans-serif;
+  font-size:1.1rem;font-weight:700;letter-spacing:.18em;line-height:1;
+  text-transform:uppercase;
   color:var(--red);
-  text-shadow:0 0 18px rgba(227,6,19,.4);
+  text-shadow:0 0 14px rgba(227,6,19,.3);
   margin-bottom:30px;
 }
 .ceo-history-dot{
@@ -2367,7 +2368,7 @@ html.light .legal-table code{background:rgba(0,0,0,.06)}
   .ceo-history{margin-top:64px}
   .ceo-history-head-label{font-size:.55rem;letter-spacing:.32em}
   .ceo-history-timeline{grid-template-columns:1fr;gap:36px}
-  .ceo-history-year{font-size:1.2rem;margin-bottom:18px}
+  .ceo-history-year{font-size:.95rem;margin-bottom:18px}
   .ceo-history-dot{margin-bottom:18px}
 }
 
