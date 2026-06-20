@@ -903,13 +903,12 @@ html.light #hero-trace .ht-static{stroke:rgba(0,0,0,.13)}
 #about::before{
   content:'SHABANI';
   position:absolute;
-  right:-3vw;
-  top:50%;
-  transform:translateY(-50%);
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
   font-family:'Ethnocentric',sans-serif;
-  font-size:clamp(3rem,6.5vw,6.5rem);
-  letter-spacing:-.015em;line-height:.85;
-  color:rgba(255,255,255,.022);
+  font-size:clamp(5rem,16vw,18rem);
+  letter-spacing:-.02em;line-height:.85;
+  color:rgba(255,255,255,.025);
   pointer-events:none;user-select:none;white-space:nowrap;
   z-index:0;
 }
