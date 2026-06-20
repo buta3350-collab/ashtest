@@ -8,7 +8,7 @@ export default function CEO() {
         <div className="section-num reveal">
           <span className="section-num-no">07</span>
           <span className="section-num-line" />
-          <span className="section-num-label">Geschäftsführer</span>
+          <span className="section-num-label">Unser Geschäftsführer</span>
         </div>
         <div className="ceo-comp">
 

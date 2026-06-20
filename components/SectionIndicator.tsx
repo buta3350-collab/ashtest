@@ -6,9 +6,9 @@ const SECTIONS = [
   { id: 'autocenter', no: '03', label: 'Autocenter' },
   { id: 'pflege',     no: '04', label: 'Pflege' },
   { id: 'process',    no: '05', label: 'Ablauf' },
-  { id: 'about',      no: '06', label: 'Standort' },
-  { id: 'ceo',        no: '07', label: 'Inhaber' },
-  { id: 'reviews',    no: '08', label: 'Stimmen' },
+  { id: 'about',      no: '06', label: 'Unser Standort' },
+  { id: 'ceo',        no: '07', label: 'Unser Inhaber' },
+  { id: 'reviews',    no: '08', label: 'Unsere Stimmen' },
   { id: 'cta',        no: '09', label: 'Kontakt' },
 ] as const
 

@@ -76,6 +76,77 @@ export default function ClientInit() {
     })
   }, [])
 
+  // Hero cursor spotlight — smooth lerp follow, only runs when needed
+  useEffect(() => {
+    const hero = document.getElementById('hero')
+    if (!hero) return
+    let rafId: number | null = null
+    let targetX = 30, targetY = 50
+    let curX = 30, curY = 50
+    let active = false
+
+    function loop() {
+      const dx = targetX - curX
+      const dy = targetY - curY
+      curX += dx * 0.07
+      curY += dy * 0.07
+      hero!.style.setProperty('--mx', curX + '%')
+      hero!.style.setProperty('--my', curY + '%')
+      // Stop loop once converged AND not actively tracking
+      if (!active && Math.abs(dx) < 0.05 && Math.abs(dy) < 0.05) {
+        rafId = null
+        return
+      }
+      rafId = requestAnimationFrame(loop)
+    }
+    function ensureLoop() {
+      if (rafId == null) rafId = requestAnimationFrame(loop)
+    }
+    function onMove(e: MouseEvent) {
+      const rect = hero!.getBoundingClientRect()
+      targetX = ((e.clientX - rect.left) / rect.width) * 100
+      targetY = ((e.clientY - rect.top) / rect.height) * 100
+      active = true
+      if (!hero!.classList.contains('hero-cursor-active')) {
+        hero!.classList.add('hero-cursor-active')
+      }
+      ensureLoop()
+    }
+    function onLeave() {
+      targetX = 30
+      targetY = 50
+      active = false
+      hero!.classList.remove('hero-cursor-active')
+      ensureLoop()
+    }
+    hero.addEventListener('mousemove', onMove)
+    hero.addEventListener('mouseleave', onLeave)
+    return () => {
+      hero.removeEventListener('mousemove', onMove)
+      hero.removeEventListener('mouseleave', onLeave)
+      if (rafId) cancelAnimationFrame(rafId)
+    }
+  }, [])
+
+  // Pause background animations when scrolled out of Hero (frees GPU)
+  useEffect(() => {
+    const hero = document.getElementById('hero')
+    const smoke = document.getElementById('red-smoke')
+    if (!hero) return
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          const paused = !e.isIntersecting
+          hero!.style.setProperty('--anim-state', paused ? 'paused' : 'running')
+          if (smoke) smoke.style.setProperty('--anim-state', paused ? 'paused' : 'running')
+        })
+      },
+      { threshold: 0, rootMargin: '0px 0px -10% 0px' }
+    )
+    io.observe(hero)
+    return () => io.disconnect()
+  }, [])
+
   useEffect(() => {
     const overlay = document.getElementById('page-transition')
     if (!overlay) return

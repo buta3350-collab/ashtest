@@ -1,9 +1,32 @@
+'use client'
+import { useEffect, useRef } from 'react'
+
 const FOUNDED_YEAR = 2004
 
 export default function About() {
   const yearsActive = new Date().getFullYear() - FOUNDED_YEAR
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const sec = sectionRef.current
+    if (!sec) return
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            sec.classList.add('about-on')
+            obs.disconnect()
+          }
+        })
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+    )
+    obs.observe(sec)
+    return () => obs.disconnect()
+  }, [])
+
   return (
-    <section id="about">
+    <section ref={sectionRef} id="about">
       <div className="about-shell">
 
         <div className="about-hero">
@@ -11,7 +34,7 @@ export default function About() {
             <div className="section-num reveal">
               <span className="section-num-no">06</span>
               <span className="section-num-line" />
-              <span className="section-num-label">Standort</span>
+              <span className="section-num-label">Unser Standort</span>
             </div>
             <h2 className="about-h2">
               Drosselweg 1,<br />

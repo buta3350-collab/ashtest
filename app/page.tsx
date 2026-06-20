@@ -7,6 +7,7 @@ import Pflege from '@/components/sections/Pflege'
 import CEO from '@/components/sections/CEO'
 import About from '@/components/sections/About'
 import Process from '@/components/sections/Process'
+import DasSindWir from '@/components/sections/DasSindWir'
 import Reviews from '@/components/sections/Reviews'
 import CTA from '@/components/sections/CTA'
 import Footer from '@/components/sections/Footer'
@@ -33,8 +34,9 @@ export default function Home() {
         <Autocenter />
         <Pflege />
         <Process />
-        <About />
+        <DasSindWir />
         <CEO />
+        <About />
         <Reviews />
         <CTA />
       </main>

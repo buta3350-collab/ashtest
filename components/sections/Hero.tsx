@@ -4,6 +4,8 @@ export default function Hero() {
   return (
     <section id="hero" aria-label="Willkommen bei Auto Shabani">
 
+      <div className="hero-aura-spark" aria-hidden="true" />
+
       <div id="hero-content">
 
         <div className="hero-eyebrow">
