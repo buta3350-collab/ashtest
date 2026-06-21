@@ -14,7 +14,7 @@ export default function Pflege() {
         <div className="section-num reveal">
           <span className="section-num-no">04</span>
           <span className="section-num-line" />
-          <span className="section-num-label">Pflege</span>
+          <span className="section-num-label">Fahrzeugpflege</span>
         </div>
         <h2 className="pfl-h2 reveal">
           Reinigung &amp;<br />
@@ -44,10 +44,14 @@ export default function Pflege() {
 
             <div className="pfl-actions">
               <button className="pfl-cta-main" data-booking-open>
-                <span>Termin vereinbaren</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16" aria-hidden="true">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="17" height="17" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="16" rx="2" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                  <line x1="8" y1="3" x2="8" y2="7" />
+                  <line x1="16" y1="3" x2="16" y2="7" />
+                  <path d="M9 15l2 2 4-4" />
                 </svg>
+                <span>Termin vereinbaren</span>
               </button>
               <a className="pfl-cta-tel" href="tel:+436641060411" aria-label="Anrufen">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14" aria-hidden="true">

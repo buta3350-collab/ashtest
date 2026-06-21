@@ -11,10 +11,10 @@ export default function Reviews() {
             <div className="section-num reveal">
               <span className="section-num-no">08</span>
               <span className="section-num-line" />
-              <span className="section-num-label">Unsere Stimmen</span>
+              <span className="section-num-label">Die Bewertungen</span>
             </div>
             <h2 className="rev-h2">
-              Kundenstimmen.
+              Kunden<wbr />stimmen.
               <span className="h2-sub">Ungekürzt aus Google Maps.</span>
             </h2>
             <p className="rev-credo">

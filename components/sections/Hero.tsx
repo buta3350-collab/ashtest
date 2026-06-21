@@ -51,7 +51,7 @@ export default function Hero() {
             sizes="(min-width: 1200px) 820px, 0px"
             style={{ objectFit: 'contain', objectPosition: 'center' }}
             priority
-            quality={100}
+            quality={90}
           />
         </div>
         <div className="hero-photo-fade" aria-hidden="true" />

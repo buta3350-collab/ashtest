@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, useMemo, useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import CarDetailModal, { BrandLogo } from '@/components/CarDetailModal'
 import CarProbefahrtModal from '@/components/CarProbefahrtModal'
 import AnkaufModal from '@/components/AnkaufModal'
@@ -248,6 +249,9 @@ function CardBrand({ brand }: { brand: string }) {
 // ── Main section ──────────────────────────────────────────────────
 export default function Autocenter() {
   const [filterOpen, setFilterOpen] = useState(false)
+  const sectionRef       = useRef<HTMLElement>(null)
+  const [mounted, setMounted] = useState(false)
+  const [barVisible, setBarVisible] = useState(true)
   const fpScrollRef      = useRef<HTMLDivElement>(null)
   const fpThumbRef     = useRef<HTMLDivElement>(null)
   const fpIndicatorRef = useRef<HTMLDivElement>(null)
@@ -451,6 +455,21 @@ export default function Autocenter() {
     return () => { document.body.style.overflow = '' }
   }, [filterOpen])
 
+  // Portal-Mount erst clientseitig
+  useEffect(() => { setMounted(true) }, [])
+
+  // Compare-Bar nur sichtbar solange Autocenter im Blick ist (smoothes Ein-/Ausblenden via CSS-Klasse)
+  useEffect(() => {
+    const sec = sectionRef.current
+    if (!sec) return
+    const io = new IntersectionObserver(
+      ([entry]) => setBarVisible(entry.isIntersecting),
+      { threshold: 0, rootMargin: '0px 0px -5% 0px' }
+    )
+    io.observe(sec)
+    return () => io.disconnect()
+  }, [])
+
 
   function toggleSec(id: string) {
     setOpenSecs(prev => { const n = new Set(prev); n.has(id) ? n.delete(id) : n.add(id); return n })
@@ -473,7 +492,7 @@ export default function Autocenter() {
   const PSS = f.powerUnit === 'PS' ? PS_STEPS : KW_STEPS
 
   return (
-    <section id="autocenter" aria-label="Autocenter — Gebrauchtwagenbestand" className="ac-section">
+    <section ref={sectionRef} id="autocenter" aria-label="Autocenter — Gebrauchtwagenbestand" className="ac-section">
 
       {selectedCar && (
         <CarDetailModal
@@ -516,7 +535,7 @@ export default function Autocenter() {
           <span className="section-num-label">Autocenter</span>
         </div>
         <h2 className="ac-h2 reveal">
-          Fahrzeug<em>angebot</em>.
+          Fahrzeug<wbr /><em>angebot</em>.
           <span className="h2-sub">Geprüfter Bestand aus Wolfsberg.</span>
         </h2>
         <p className="ac-lede reveal">
@@ -872,9 +891,9 @@ export default function Autocenter() {
         </section>
       </main>
 
-      {/* ── Compare bar ─────────────────────────────────── */}
-      {compareList.length > 0 && (
-        <div className="compare-bar">
+      {/* ── Compare bar (Portal an body → garantiert im Vordergrund) ── */}
+      {mounted && compareList.length > 0 && createPortal(
+        <div className={`compare-bar${barVisible ? '' : ' compare-bar--hidden'}`}>
           <div className="compare-bar-inner">
             <div className="compare-bar-cars">
               {compareList.map(c => (
@@ -908,7 +927,8 @@ export default function Autocenter() {
               <button className="compare-bar-clear" onClick={() => setCompareList([])}>Alles löschen</button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* ── Compare modal ────────────────────────────────── */}

@@ -26,21 +26,21 @@ const IconAutocenter = () => (
 
 const GROUPS = [
   {
-    name: 'Fahrzeugpflege',
-    Icon: IconPflege,
-    items: [
-      'Profi-Pflegeprodukte aus dem Fachhandel',
-      'Keramikversiegelung mit 7 Jahren Garantie',
-      'Abnahme persönlich durch den Meister',
-    ],
-  },
-  {
     name: 'Autocenter',
     Icon: IconAutocenter,
     items: [
       'Gebrauchtwagen aus geprüftem Bestand',
       'Beratung ohne Verkaufsdruck',
       'Eigener Standort am Drosselweg seit 2004',
+    ],
+  },
+  {
+    name: 'Fahrzeugpflege',
+    Icon: IconPflege,
+    items: [
+      'Profi-Pflegeprodukte aus dem Fachhandel',
+      'Keramikversiegelung mit 7 Jahren Garantie',
+      'Abnahme persönlich durch den Meister',
     ],
   },
 ] as const

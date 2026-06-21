@@ -2,8 +2,11 @@
 import { useEffect, useRef } from 'react'
 
 const WORDS = ['DAS', 'SIND', 'WIR'] as const
-const FINAL_Y_VH = [-22, 0, 22] as const
-const PARKED_AT = 0.95
+
+// Reveal vollständig bei diesem Scroll-Anteil → ab hier Sheen + Hint.
+const REVEAL_DONE = 0.72
+// Pro-Wort Reveal-Fenster (überlappend) innerhalb [0 .. REVEAL_DONE].
+const PHASE_DURATION = 0.42
 
 export default function DasSindWir() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -13,45 +16,49 @@ export default function DasSindWir() {
     const section = sectionRef.current
     const stage = stageRef.current
     if (!section || !stage) return
-    const wordEls = stage.querySelectorAll<HTMLElement>('.dsw-word')
+    const wordEls = Array.from(stage.querySelectorAll<HTMLElement>('.dsw-word'))
+    if (!wordEls.length) return
 
-    let pending = false
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduce) {
+      wordEls.forEach((el) => { el.style.opacity = '1'; el.style.transform = 'none' })
+      stage.classList.add('dsw-sheen', 'dsw-hint')
+      return
+    }
+
+    const n = WORDS.length
+    const spacing = n > 1 ? (REVEAL_DONE - PHASE_DURATION) / (n - 1) : 0
+
     let rafId: number | null = null
+    let pending = false
     let maxProgress = 0
-    let sheenTriggered = false
+    let sheenOn = false
 
     function update() {
       pending = false
       const rect = section!.getBoundingClientRect()
-      const viewportH = window.innerHeight
-      const earlyOffset = viewportH * 0.6
-      const totalScroll = section!.offsetHeight - viewportH + earlyOffset
-      const scrolled = -rect.top + earlyOffset
-      const progress = totalScroll > 0
-        ? Math.max(0, Math.min(1, scrolled / totalScroll))
-        : 0
+      const vh = window.innerHeight
+      const early = vh * 0.55
+      const total = section!.offsetHeight - vh + early
+      const scrolled = -rect.top + early
+      const progress = total > 0 ? Math.max(0, Math.min(1, scrolled / total)) : 0
 
       if (progress > maxProgress) maxProgress = progress
       const p = maxProgress
 
-      const PHASE_DURATION = 0.45
-      const PHASE_SPACING = (PARKED_AT - PHASE_DURATION) / (WORDS.length - 1)
+      for (let i = 0; i < wordEls.length; i++) {
+        const el = wordEls[i]
+        const start = i * spacing
+        const t = Math.max(0, Math.min(1, (p - start) / PHASE_DURATION))
+        const e = 1 - Math.pow(1 - t, 5) // ease-out quint
+        const y = (1 - e) * 0.85 // in em — Aufstieg innerhalb des eigenen Slots
+        el.style.transform = `translateY(${y}em)`
+        el.style.opacity = String(Math.min(1, t * 1.8))
+      }
 
-      wordEls.forEach((el, i) => {
-        const phaseStart = i * PHASE_SPACING
-        const phaseEnd = phaseStart + PHASE_DURATION
-        const t = Math.max(0, Math.min(1, (p - phaseStart) / (phaseEnd - phaseStart)))
-        const eased = 1 - Math.pow(1 - t, 3)
-        const startY = 120
-        const finalY = FINAL_Y_VH[i]
-        const y = startY + (finalY - startY) * eased
-        el.style.transform = `translate(-50%, calc(-50% + ${y}vh))`
-        el.style.opacity = y > 50 ? '0' : '1'
-      })
-
-      if (!sheenTriggered && p >= PARKED_AT) {
-        sheenTriggered = true
-        stage!.classList.add('dsw-sheen')
+      if (!sheenOn && p >= REVEAL_DONE) {
+        sheenOn = true
+        stage!.classList.add('dsw-sheen', 'dsw-hint')
       }
     }
 
@@ -81,6 +88,14 @@ export default function DasSindWir() {
               {i === WORDS.length - 1 && <span className="dsw-dot">.</span>}
             </span>
           ))}
+        </div>
+        <div className="dsw-scroll-hint" aria-hidden="true">
+          <span className="dsw-scroll-label">Weiter lesen</span>
+          <span className="dsw-scroll-chev">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+          </span>
         </div>
         <h2 className="dsw-sr">Das sind wir.</h2>
       </div>

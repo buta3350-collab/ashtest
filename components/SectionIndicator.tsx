@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react'
 const SECTIONS = [
   { id: 'vehicles',   no: '02', label: 'Bereiche' },
   { id: 'autocenter', no: '03', label: 'Autocenter' },
-  { id: 'pflege',     no: '04', label: 'Pflege' },
+  { id: 'pflege',     no: '04', label: 'Fahrzeugpflege' },
   { id: 'process',    no: '05', label: 'Ablauf' },
   { id: 'about',      no: '06', label: 'Unser Standort' },
-  { id: 'ceo',        no: '07', label: 'Unser Inhaber' },
-  { id: 'reviews',    no: '08', label: 'Unsere Stimmen' },
+  { id: 'ceo',        no: '07', label: 'Der Geschäftsführer' },
+  { id: 'reviews',    no: '08', label: 'Die Bewertungen' },
   { id: 'cta',        no: '09', label: 'Kontakt' },
 ] as const
 

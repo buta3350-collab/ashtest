@@ -8,7 +8,7 @@ export default function CEO() {
         <div className="section-num reveal">
           <span className="section-num-no">07</span>
           <span className="section-num-line" />
-          <span className="section-num-label">Unser Geschäftsführer</span>
+          <span className="section-num-label">Der Geschäftsführer</span>
         </div>
         <div className="ceo-comp">
 
@@ -20,8 +20,9 @@ export default function CEO() {
                 alt="Meister Behar Shabani — Geschäftsführer und Inhaber"
                 width={900}
                 height={1100}
-                quality={100}
-                priority
+                quality={90}
+                loading="lazy"
+                sizes="(max-width: 768px) 90vw, (max-width: 1200px) 50vw, 560px"
                 style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
               />
               <div className="ceo-portrait-tone" aria-hidden="true" />
