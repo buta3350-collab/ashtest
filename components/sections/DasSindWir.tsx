@@ -89,14 +89,14 @@ export default function DasSindWir() {
             </span>
           ))}
         </div>
-        <div className="dsw-scroll-hint" aria-hidden="true">
+        <a href="#ceo" className="dsw-scroll-hint" aria-label="Weiter zum Geschäftsführer">
           <span className="dsw-scroll-label">Weiter lesen</span>
           <span className="dsw-scroll-chev">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 5v14M5 12l7 7 7-7"/>
             </svg>
           </span>
-        </div>
+        </a>
         <h2 className="dsw-sr">Das sind wir.</h2>
       </div>
     </section>

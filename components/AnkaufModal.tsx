@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 
 const CY = new Date().getFullYear()
 const YEARS = Array.from({ length: CY - 1984 }, (_, i) => CY - i)
@@ -61,7 +62,7 @@ export default function AnkaufModal({ onClose }: Props) {
     setSubmitting(false)
   }
 
-  return (
+  return createPortal(
     <div className="akm-backdrop" onClick={onClose}>
       <div className="akm-panel" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true">
 
@@ -203,6 +204,7 @@ export default function AnkaufModal({ onClose }: Props) {
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }

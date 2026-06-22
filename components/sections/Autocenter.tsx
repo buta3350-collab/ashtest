@@ -449,11 +449,12 @@ export default function Autocenter() {
     equip:      f.equipment.length,
   }), [f])
 
+  // Hintergrund-Scroll sperren solange Filter ODER irgendein Fenster offen ist
   useEffect(() => {
-    if (filterOpen) document.body.style.overflow = 'hidden'
-    else document.body.style.overflow = ''
+    const lock = filterOpen || !!selectedCar || showProbefahrt || showCompare || showSuche || showAnkauf
+    document.body.style.overflow = lock ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
-  }, [filterOpen])
+  }, [filterOpen, selectedCar, showProbefahrt, showCompare, showSuche, showAnkauf])
 
   // Portal-Mount erst clientseitig
   useEffect(() => { setMounted(true) }, [])
@@ -490,6 +491,9 @@ export default function Autocenter() {
   }
 
   const PSS = f.powerUnit === 'PS' ? PS_STEPS : KW_STEPS
+
+  // Compare-Bar verstecken, sobald ein anderes Fenster offen ist (Detail, Probefahrt, Vergleich, Suche, Ankauf)
+  const anyModalOpen = !!selectedCar || showProbefahrt || showCompare || showSuche || showAnkauf
 
   return (
     <section ref={sectionRef} id="autocenter" aria-label="Autocenter — Gebrauchtwagenbestand" className="ac-section">
@@ -762,11 +766,11 @@ export default function Autocenter() {
                 <span className="sort-wrap-label">Sortieren</span>
                 <select className="sort-select" value={f.sort} onChange={e => setKey('sort', e.target.value)}>
                   <option value="newest">Neueste zuerst</option>
-                  <option value="price-asc">Preis ↑</option>
-                  <option value="price-desc">Preis ↓</option>
-                  <option value="year-desc">Baujahr: neueste</option>
-                  <option value="year-asc">Baujahr: älteste</option>
-                  <option value="km-asc">Kilometer ↑</option>
+                  <option value="price-asc">Preis aufsteigend</option>
+                  <option value="price-desc">Preis absteigend</option>
+                  <option value="year-desc">Baujahr: neueste zuerst</option>
+                  <option value="year-asc">Baujahr: älteste zuerst</option>
+                  <option value="km-asc">Kilometer aufsteigend</option>
                 </select>
               </div>
             </div>
@@ -893,7 +897,7 @@ export default function Autocenter() {
 
       {/* ── Compare bar (Portal an body → garantiert im Vordergrund) ── */}
       {mounted && compareList.length > 0 && createPortal(
-        <div className={`compare-bar${barVisible ? '' : ' compare-bar--hidden'}`}>
+        <div className={`compare-bar${(barVisible && !anyModalOpen) ? '' : ' compare-bar--hidden'}`}>
           <div className="compare-bar-inner">
             <div className="compare-bar-cars">
               {compareList.map(c => (
@@ -1007,17 +1011,17 @@ function SucheModal({ onClose }: { onClose: () => void }) {
     }
   }
 
-  return (
+  return createPortal(
     <div className="suche-backdrop" onClick={onClose}>
       <div className="suche-modal" onClick={e => e.stopPropagation()}>
 
         <div className="suche-head">
-          <div style={{flex:1}}>
+          <div style={{flex:1, paddingRight:'40px'}}>
             <div className="akm-eyebrow">Autocenter Shabani</div>
             <h2 className="akm-title" style={{fontSize:'1.2rem'}}>Wunschfahrzeug <em>anfragen</em></h2>
             <p className="akm-subtitle">Kein passendes Fahrzeug gefunden? Teilen Sie uns Ihre Wünsche mit — wir finden es für Sie.</p>
           </div>
-          <button className="akm-close" style={{position:'static',float:'none',margin:'0 0 0 12px',flexShrink:0}} onClick={onClose} aria-label="Schließen">
+          <button className="akm-close" style={{position:'absolute',top:'16px',right:'16px',float:'none',margin:0,flexShrink:0,zIndex:3}} onClick={onClose} aria-label="Schließen">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
           </button>
         </div>
@@ -1141,7 +1145,8 @@ function SucheModal({ onClose }: { onClose: () => void }) {
         )}
 
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 

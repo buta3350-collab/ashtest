@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Manrope, Syncopate } from 'next/font/google'
 import localFont from 'next/font/local'
 import './globals.css'
@@ -27,10 +27,19 @@ const ethnocentric = localFont({
 export const metadata: Metadata = {
   title: 'Autoreinigung & Autocenter Shabani | Wolfsberg',
   description: 'Gebrauchtwagenhandel & professionelle Fahrzeugpflege in Wolfsberg. Seit 2004 — persönlich, ehrlich, zuverlässig.',
+  manifest: '/site.webmanifest',
   icons: {
-    icon: '/LOGO_crop.png',
-    apple: '/LOGO_crop.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-96x96.png', type: 'image/png', sizes: '96x96' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
   },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#0d0d10',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

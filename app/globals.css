@@ -406,8 +406,8 @@ html.light .hero-aura-spark{
 html.light #hero::before{
   mix-blend-mode:multiply;
   background:
-    radial-gradient(ellipse 42% 40% at 36% 42%, rgba(150,60,70,.12) 0%, rgba(150,60,70,.04) 56%, transparent 82%),
-    radial-gradient(ellipse 48% 46% at 30% 78%, rgba(45,55,90,.14) 0%, rgba(45,55,90,.05) 60%, transparent 84%);
+    radial-gradient(ellipse 42% 40% at 36% 42%, rgba(160,40,52,.28) 0%, rgba(160,40,52,.1) 54%, transparent 80%),
+    radial-gradient(ellipse 48% 46% at 30% 78%, rgba(38,48,88,.32) 0%, rgba(38,48,88,.12) 58%, transparent 82%);
 }
 
 /* Main content panel */
@@ -597,6 +597,13 @@ html.light #hero::before{
   to{opacity:1;transform:translateX(0)}
 }
 @media(min-width:1180px){#hero-map{display:block}}
+/* Laptops: rechte Foto-Seite schmaler → linke Seite (Hintergrund/Text) breiter */
+@media(min-width:1180px) and (max-width:1536px){
+  #hero-map{width:60%}
+}
+@media(min-width:1180px) and (max-width:1340px){
+  #hero-map{width:55%}
+}
 
 .hero-photo{
   position:absolute;inset:0;
@@ -3213,6 +3220,15 @@ html.light #ham span{background:#1c1714}
 html.light #mob-menu{background:#eeecea}
 html.light #mob-menu a{color:rgba(0,0,0,.18);border-color:rgba(0,0,0,.07)}
 html.light #mob-menu a:hover{color:#1c1714}
+/* Mobile-Menü Light Mode: Buttons & Sub-Labels lesbar (waren weiß auf weiß) */
+html.light .mob-item-btn{color:rgba(0,0,0,.32);border-color:rgba(0,0,0,.08)}
+html.light .mob-item-btn:hover,html.light .mob-item-btn.mob-open{color:#1c1714}
+html.light .mob-sub-link{border-color:rgba(0,0,0,.05)}
+html.light .mob-sub-label{color:rgba(0,0,0,.7)}
+html.light .mob-sub-desc{color:rgba(0,0,0,.45)}
+html.light .mob-sub-link:hover .mob-sub-label{color:#1c1714}
+html.light .mob-sub-link:hover .mob-sub-desc{color:rgba(0,0,0,.6)}
+html.light .mob-chevron{color:rgba(0,0,0,.4)}
 
 html.light .hero-label{color:rgba(0,0,0,.42) !important}
 html.light .hero-h1{color:#1c1714}
@@ -3703,6 +3719,11 @@ html.light footer{
   color:rgba(255,255,255,.28);
   cursor:not-allowed;
 }
+/* Light Mode: disabled-Button lesbar (war weiß auf weiß) */
+html.light .booking-submit:disabled{
+  background:rgba(0,0,0,.09);
+  color:rgba(0,0,0,.42);
+}
 .booking-success{display:none;text-align:center;padding:80px 20px}
 .booking-success.show{display:block}
 .booking-success-icon{
@@ -4187,6 +4208,7 @@ html.light .car-detail-btn:hover{color:rgba(0,0,0,.82)}
 .car-compare-btn.on{background:rgba(227,6,19,.18);border-color:#e30613;color:#fff}
 .car-compare-btn:disabled{opacity:.2;cursor:not-allowed}
 html.light .car-compare-btn{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.07);color:rgba(0,0,0,.28)}
+html.light .car-compare-btn:hover:not(:disabled){background:rgba(0,0,0,.08);border-color:rgba(0,0,0,.2);color:rgba(0,0,0,.72)}
 html.light .car-compare-btn.on{background:rgba(227,6,19,.1);border-color:#e30613;color:var(--red-ink)}
 
 /* ── Compare bar ───────────────────────────────────────── */
@@ -4212,7 +4234,16 @@ html.light .car-compare-btn.on{background:rgba(227,6,19,.1);border-color:#e30613
   display:flex;align-items:center;gap:14px;
   padding:12px 24px 16px;
 }
-.compare-bar-cars{display:flex;gap:8px;flex:1;min-width:0;overflow-x:auto}
+.compare-bar-cars{
+  display:flex;gap:8px;flex:1;min-width:0;overflow-x:auto;
+  scrollbar-width:thin;
+  scrollbar-color:#e30613 rgba(255,255,255,.12);
+  scroll-padding:8px;
+}
+.compare-bar-cars::-webkit-scrollbar{height:6px}
+.compare-bar-cars::-webkit-scrollbar-track{background:rgba(255,255,255,.1);border-radius:3px}
+.compare-bar-cars::-webkit-scrollbar-thumb{background:#e30613;border-radius:3px}
+.compare-bar-cars::-webkit-scrollbar-thumb:hover{background:#ff1a27}
 .compare-bar-item{
   display:flex;align-items:center;gap:10px;
   background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
@@ -4260,6 +4291,22 @@ html.light .car-compare-btn.on{background:rgba(227,6,19,.1);border-color:#e30613
   font-size:.68rem;transition:all .18s;white-space:nowrap;text-align:center;
 }
 .compare-bar-clear:hover{color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.2)}
+
+/* Compare-Bar Handy: gestapelt, Autos horizontal scrollbar (roter Balken) */
+@media(max-width:768px){
+  .compare-bar-inner{
+    flex-direction:column;align-items:stretch;
+    gap:10px;padding:10px 14px 12px;
+  }
+  .compare-bar-cars{padding-bottom:9px}        /* Platz für roten Scrollbalken */
+  .compare-bar-item{
+    flex:0 0 auto;width:200px;max-width:200px;  /* feste Breite → echtes Scrollen statt Quetschen */
+  }
+  .compare-bar-item.compare-bar-placeholder{width:150px}
+  .compare-bar-actions{flex-direction:row;gap:8px}
+  .compare-bar-btn{flex:1;justify-content:center}
+  .compare-bar-clear{flex:0 0 auto}
+}
 
 /* ── Compare modal V2 ──────────────────────────────────── */
 @keyframes cv2In{
@@ -4679,16 +4726,19 @@ html.light .car-compare-btn.on{background:rgba(227,6,19,.1);border-color:#e30613
   border-radius:16px;width:100%;max-width:580px;
   max-height:calc(100vh - 120px);
   display:flex;flex-direction:column;overflow:hidden;
+  position:relative;
 }
 .suche-head{padding:28px 32px 20px;flex-shrink:0;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;border-bottom:1px solid rgba(255,255,255,.07)}
 .suche-head .compare-close{flex-shrink:0;margin-top:2px}
 .suche-title{font-family:'Syncopate',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin:0 0 6px}
 .suche-sub{font-size:.8rem;color:rgba(255,255,255,.45);margin:0;line-height:1.5}
 .suche-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-.suche-field{display:flex;flex-direction:column;gap:6px}
+@media(max-width:560px){.suche-grid{grid-template-columns:1fr}}
+.suche-field{display:flex;flex-direction:column;gap:6px;min-width:0}
 .suche-field.suche-field-full{grid-column:1/-1}
 .suche-field label{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);font-family:'Syncopate',sans-serif}
 .suche-field input,.suche-field select,.suche-field textarea{
+  width:100%;box-sizing:border-box;min-width:0;
   background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
   border-radius:8px;padding:9px 12px;color:#fff;
   font-family:'Manrope',sans-serif;font-size:.84rem;
@@ -4851,7 +4901,7 @@ html.light .suche-success p strong{color:#1c1714}
   border-radius:8px;padding:8px 12px;color:#fff;
   font-family:'Manrope',sans-serif;font-size:.84rem;outline:none;
 }
-.cdm-calc-select option{background:#1c1c1e}
+.cdm-calc-select option{background:#1c1c1e;color:#fff}
 .cdm-calc-result{
   background:rgba(227,6,19,.16);border:1px solid rgba(227,6,19,.35);
   border-radius:10px;padding:14px 16px;margin-top:4px;
@@ -4891,6 +4941,8 @@ html.light .suche-success p strong{color:#1c1714}
 
 /* Light mode overrides */
 html.light .compare-bar{background:#f4f1ec;border-top-color:rgba(0,0,0,.12)}
+html.light .compare-bar-cars{scrollbar-color:#e30613 rgba(0,0,0,.1)}
+html.light .compare-bar-cars::-webkit-scrollbar-track{background:rgba(0,0,0,.08)}
 html.light .compare-bar-item{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.1)}
 html.light .compare-bar-item.compare-bar-placeholder{border-color:rgba(0,0,0,.15);color:rgba(0,0,0,.25)}
 html.light .compare-bar-add-icon{border-color:rgba(0,0,0,.2);color:rgba(0,0,0,.2)}
@@ -5025,6 +5077,7 @@ html.light .cdm-calc-prefix,html.light .cdm-calc-suffix{color:rgba(0,0,0,.4)}
 html.light .cdm-calc-input-wrap{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.12)}
 html.light .cdm-calc-input{color:#1c1714}
 html.light .cdm-calc-select{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.1);color:#1c1714}
+html.light .cdm-calc-select option{background:#ffffff;color:#1c1714}
 html.light .cdm-calc-result{background:rgba(227,6,19,.06);border-color:rgba(227,6,19,.22)}
 html.light .cdm-calc-rate{color:#1c1714}
 html.light .cdm-calc-rate-unit{color:rgba(0,0,0,.45)}
@@ -5267,7 +5320,7 @@ html.light #verkauf-header{
 }
 html.light .vk-header-h1{color:#1c1714}
 html.light .vk-header-sub{color:rgba(0,0,0,.6)}
-html.light .filter-panel{background:linear-gradient(180deg,rgba(255,255,255,.92) 0%,rgba(248,248,250,.96) 100%);border-color:rgba(0,0,0,.08);box-shadow:0 8px 48px rgba(0,0,0,.1)}
+html.light .filter-panel{background:linear-gradient(180deg,#ffffff 0%,#f4f4f6 100%);border-color:rgba(0,0,0,.08);box-shadow:0 8px 48px rgba(0,0,0,.1)}
 html.light .filter-head{border-bottom-color:rgba(0,0,0,.07)}
 html.light .filter-head h3{color:#1c1714}
 html.light .filter-group label{color:rgba(0,0,0,.4)}
@@ -5986,6 +6039,16 @@ html.light .car-brand-name{color:rgba(0,0,0,.45)}
   font-size:.62rem;letter-spacing:.03em;
   color:rgba(255,255,255,.35);flex-shrink:0;
 }
+/* Handy: Zoombar kompakt — Slider schmaler, Hinweistext/Trenner aus */
+@media(max-width:768px){
+  .cdm-zoom-zoombar{
+    gap:8px;padding:7px 12px;
+    max-width:calc(100vw - 24px);
+    top:60px;
+  }
+  .cdm-zoom-zoombar-range{width:96px}
+  .cdm-zoom-zoombar-hint,.cdm-zoom-zoombar-sep{display:none}
+}
 /* Bottom bar: counter + image scrubber + hint */
 .cdm-zoom-bottombar{
   position:absolute;bottom:0;left:0;right:0;
@@ -6657,6 +6720,10 @@ html.light .pfm-summary{
 html.light .pfm-success h3{color:#1c1714}
 html.light .pfm-success p{color:rgba(0,0,0,.5)}
 html.light .pfm-close{background:rgba(0,0,0,.05);border-color:rgba(0,0,0,.1);color:rgba(0,0,0,.5)}
+/* Disabled-Button im hellen Modus klar lesbar (war rot@45% → blass auf weiß) */
+html.light .pfm-submit:disabled{opacity:1;background:rgba(0,0,0,.1);color:rgba(0,0,0,.45);box-shadow:none}
+html.light .ckm-submit:disabled{opacity:1;background:rgba(0,0,0,.1);color:rgba(0,0,0,.45);box-shadow:none}
+html.light .suche-send:disabled{opacity:1;background:rgba(0,0,0,.1);color:rgba(0,0,0,.45);box-shadow:none}
 
 /* ══════════════════════════════════════════════════════════
    FILTER PANEL — comprehensive fp-* styles
@@ -7303,13 +7370,13 @@ html.light .fp-active-badge{background:var(--red)}
   background:rgba(0,0,0,.75);
   backdrop-filter:blur(6px);
   display:flex;align-items:center;justify-content:center;
-  padding:16px;
+  padding:100px 20px 20px;
   animation:fadeIn .22s ease;
 }
 .akm-panel{
   position:relative;
   width:100%;max-width:560px;
-  max-height:90vh;overflow-y:auto;
+  max-height:calc(100vh - 120px);overflow-y:auto;
   background:#161619;
   border:1px solid rgba(255,255,255,.08);
   border-radius:18px;
@@ -7357,6 +7424,7 @@ html.light .akm-section-label{color:#1c1714;background:linear-gradient(135deg,rg
 .akm-form{
   display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px;
 }
+@media(max-width:560px){.akm-form{grid-template-columns:1fr}}
 .akm-form input,
 .akm-form select,
 .akm-form textarea{
@@ -7366,7 +7434,7 @@ html.light .akm-section-label{color:#1c1714;background:linear-gradient(135deg,rg
   padding:11px 14px;
   font-family:'Manrope',sans-serif;font-size:.83rem;color:#fff;
   transition:border-color .18s,background .18s;
-  outline:none;width:100%;
+  outline:none;width:100%;min-width:0;box-sizing:border-box;
 }
 .akm-form input::placeholder,
 .akm-form select::placeholder,
@@ -7810,6 +7878,20 @@ html.light .pfl-spec-block{border-color:rgba(0,0,0,.05)}
 @media(max-width:680px){
   .dsw-word{font-size:clamp(2.9rem, 17vw, 6rem)}
 }
+/* Handy: Sheen bleibt, aber LEICHTGEWICHTIG — nur background-position sweept.
+   Kein letter-spacing (Reflow) und kein drop-shadow (Repaint) → smooth statt ruckelig. */
+@media(max-width:768px){
+  .dsw-stage.dsw-sheen .dsw-word{
+    animation:dswSheenMobile 2.4s ease-in-out 0s 1 forwards !important;
+    filter:none !important;
+  }
+  .dsw-stage.dsw-sheen .dsw-word:nth-child(2){animation-delay:.22s !important}
+  .dsw-stage.dsw-sheen .dsw-word:nth-child(3){animation-delay:.44s !important}
+}
+@keyframes dswSheenMobile{
+  0%,100%{background-position:100% center}
+  50%{background-position:0% center}
+}
 
 @media(prefers-reduced-motion:reduce){
   #das-sind-wir{height:100vh}
@@ -7983,12 +8065,14 @@ html.light #cta{
   opacity:0;
   transition:opacity .5s ease .15s, transform .6s cubic-bezier(.19,1,.22,1) .15s;
   pointer-events:none;
+  text-decoration:none;cursor:pointer;
   z-index:3;
 }
 .dsw-stage.dsw-hint ~ .dsw-scroll-hint,
 .dsw-sticky:has(.dsw-stage.dsw-hint) .dsw-scroll-hint{
   opacity:1;
   transform:translateX(-50%) translateY(0);
+  pointer-events:auto;
 }
 .dsw-scroll-label{
   font-family:'Syncopate',sans-serif;
@@ -8143,27 +8227,23 @@ html.light .dsw-scroll-label{color:#1c1714;text-shadow:0 0 10px rgba(227,6,19,.3
    MOBILE: klare Trennung zwischen "Der Geschäftsführer" (CEO)
    und "Unser Standort" (About). Nur Handy; Desktop bleibt nahtlos.
    ════════════════════════════════════════════════════════════ */
-@media(max-width:768px){
-  #about{
-    background:var(--sec-b) !important;       /* anderer Ton als CEO darüber */
-    border-top:1px solid rgba(255,255,255,.12) !important;
-    box-shadow:inset 0 26px 34px -26px rgba(0,0,0,.65) !important;
-    position:relative;
-  }
-  /* kurzer roter Akzent oben mittig als Kapitel-Marker */
-  #about::after{
-    content:'';
-    position:absolute;top:-1px;left:50%;
-    width:54px;height:3px;border-radius:0 0 3px 3px;
-    transform:translateX(-50%);
-    background:var(--red);
-    box-shadow:0 0 16px rgba(227,6,19,.6);
-    z-index:3;
-  }
-  html.light #about{
-    background:var(--sec-lb) !important;
-    border-top-color:rgba(0,0,0,.14) !important;
-  }
+#about{
+  border-top:1px solid rgba(255,255,255,.1) !important;
+  box-shadow:inset 0 24px 32px -26px rgba(0,0,0,.55) !important;
+  position:relative;
+}
+#about::after{
+  content:'';
+  position:absolute;top:-1px;left:50%;
+  width:62px;height:3px;border-radius:0 0 3px 3px;
+  transform:translateX(-50%);
+  background:var(--red);
+  box-shadow:0 0 16px rgba(227,6,19,.55);
+  z-index:3;pointer-events:none;
+}
+html.light #about{
+  border-top-color:rgba(0,0,0,.12) !important;
+  box-shadow:inset 0 24px 30px -26px rgba(0,0,0,.26) !important;
 }
 
 
