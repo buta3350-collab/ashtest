@@ -54,6 +54,8 @@ export default function BookingModal() {
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
+    document.body.classList.toggle('modal-open', isOpen)
+    return () => { document.body.classList.remove('modal-open') }
   }, [isOpen])
 
   useEffect(() => {

@@ -449,11 +449,12 @@ export default function Autocenter() {
     equip:      f.equipment.length,
   }), [f])
 
-  // Hintergrund-Scroll sperren solange Filter ODER irgendein Fenster offen ist
+  // Hintergrund-Scroll sperren + Nav ausblenden solange Filter ODER ein Fenster offen ist
   useEffect(() => {
     const lock = filterOpen || !!selectedCar || showProbefahrt || showCompare || showSuche || showAnkauf
     document.body.style.overflow = lock ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    document.body.classList.toggle('modal-open', lock)
+    return () => { document.body.style.overflow = ''; document.body.classList.remove('modal-open') }
   }, [filterOpen, selectedCar, showProbefahrt, showCompare, showSuche, showAnkauf])
 
   // Portal-Mount erst clientseitig

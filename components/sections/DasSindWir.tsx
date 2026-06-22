@@ -22,8 +22,27 @@ export default function DasSindWir() {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce) {
       wordEls.forEach((el) => { el.style.opacity = '1'; el.style.transform = 'none' })
-      stage.classList.add('dsw-sheen', 'dsw-hint')
+      stage.classList.add('dsw-in', 'dsw-sheen', 'dsw-hint')
       return
+    }
+
+    // MOBILE: sanfter, ruckelfreier Reveal über IntersectionObserver + CSS-Transitions
+    // (kein scroll-getriebenes Per-Frame-JS → smooth auf dem Handy)
+    const mobile = window.matchMedia('(max-width: 768px)').matches
+    if (mobile) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return
+            stage.classList.add('dsw-in')
+            window.setTimeout(() => stage.classList.add('dsw-sheen', 'dsw-hint'), 900)
+            io.disconnect()
+          })
+        },
+        { threshold: 0.3 }
+      )
+      io.observe(section)
+      return () => io.disconnect()
     }
 
     const n = WORDS.length

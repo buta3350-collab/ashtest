@@ -129,8 +129,10 @@ body{font-family:'Manrope',sans-serif;background:var(--black);color:var(--white)
   position:fixed;top:0;left:0;right:0;z-index:500;
   height:110px;display:flex;align-items:center;
   padding:0 48px;
-  transition:background .5s var(--ease),backdrop-filter .5s,height .4s var(--ease);
+  transition:background .5s var(--ease),backdrop-filter .5s,height .4s var(--ease),opacity .25s ease;
 }
+/* Nav ausblenden solange ein Fenster/Modal offen ist (verhindert Überdecken von X etc.) */
+body.modal-open #nav{opacity:0;pointer-events:none}
 #nav.glass{
   height:80px;
   background:rgba(10,10,10,.82);
@@ -2939,8 +2941,14 @@ html.light .proc-tracks::before{background:linear-gradient(to bottom,transparent
 
 /* ── Mobile (≤768px) ────────────────────────────────────── */
 @media(max-width:768px){
-  #nav{padding:0 16px;height:64px;top:0;left:0;right:0;border-radius:0;transform:none;width:100% !important;display:flex;align-items:center}
-  #nav.glass{height:60px}
+  #nav{
+    padding:0 16px;height:64px;top:0;left:0;right:0;border-radius:0;transform:none;width:100% !important;display:flex;align-items:center;
+    background:rgba(12,12,15,.9);
+    backdrop-filter:blur(22px) saturate(180%);
+    -webkit-backdrop-filter:blur(22px) saturate(180%);
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  #nav.glass{height:60px;background:rgba(10,10,12,.95)}
   #nav.nav-collapsed{width:100% !important;border-radius:0;cursor:default;transform:none !important}
   .nav-inner{display:flex !important;align-items:center;flex:1;min-width:0;transform:none !important;opacity:1 !important}
   .nav-logo{height:44px !important;max-width:120px}
@@ -7878,9 +7886,26 @@ html.light .pfl-spec-block{border-color:rgba(0,0,0,.05)}
 @media(max-width:680px){
   .dsw-word{font-size:clamp(2.9rem, 17vw, 6rem)}
 }
-/* Handy: Sheen bleibt, aber LEICHTGEWICHTIG — nur background-position sweept.
-   Kein letter-spacing (Reflow) und kein drop-shadow (Repaint) → smooth statt ruckelig. */
+/* ════════════════════════════════════════════════════════════
+   DAS·SIND·WIR auf Handy: normale Section + smoother CSS-Reveal
+   (kein 118vh Scroll-Sticky, kein per-frame JS → ruckelfrei)
+   ════════════════════════════════════════════════════════════ */
 @media(max-width:768px){
+  #das-sind-wir{height:100vh !important;min-height:560px}
+  .dsw-sticky{position:relative;top:0}
+
+  /* Wörter: gestaffelter, weicher Aufstieg per CSS-Transition */
+  .dsw-word{
+    opacity:0;
+    transform:translateY(38px);
+    transition:opacity .8s ease, transform .9s cubic-bezier(.19,1,.22,1);
+  }
+  .dsw-stage.dsw-in .dsw-word{opacity:1;transform:none}
+  .dsw-stage.dsw-in .dsw-word:nth-child(1){transition-delay:.05s}
+  .dsw-stage.dsw-in .dsw-word:nth-child(2){transition-delay:.22s}
+  .dsw-stage.dsw-in .dsw-word:nth-child(3){transition-delay:.4s}
+
+  /* Sheen bleibt, aber LEICHTGEWICHTIG — nur background-position (kein Reflow/Repaint) */
   .dsw-stage.dsw-sheen .dsw-word{
     animation:dswSheenMobile 2.4s ease-in-out 0s 1 forwards !important;
     filter:none !important;
