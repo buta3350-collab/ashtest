@@ -133,9 +133,6 @@ body{font-family:'Manrope',sans-serif;background:var(--black);color:var(--white)
 }
 /* Nav ausblenden solange ein Fenster/Modal offen ist (verhindert Überdecken von X etc.) */
 body.modal-open #nav{opacity:0;pointer-events:none}
-/* Filter-Panel (fixed, in .ac-shell-Stacking-Context gefangen) über die folgenden
-   Sektionen heben — nur wenn ein Fenster offen ist (Nav ist dann eh ausgeblendet). */
-body.modal-open #autocenter{z-index:1000}
 #nav.glass{
   height:80px;
   background:rgba(10,10,10,.82);

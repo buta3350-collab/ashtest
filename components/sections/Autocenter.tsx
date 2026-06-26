@@ -251,6 +251,7 @@ export default function Autocenter() {
   const [filterOpen, setFilterOpen] = useState(false)
   const sectionRef       = useRef<HTMLElement>(null)
   const [mounted, setMounted] = useState(false)
+  const [isMobileView, setIsMobileView] = useState(false)
   const [barVisible, setBarVisible] = useState(true)
   const fpScrollRef      = useRef<HTMLDivElement>(null)
   const fpThumbRef     = useRef<HTMLDivElement>(null)
@@ -457,8 +458,15 @@ export default function Autocenter() {
     return () => { document.body.style.overflow = ''; document.body.classList.remove('modal-open') }
   }, [filterOpen, selectedCar, showProbefahrt, showCompare, showSuche, showAnkauf])
 
-  // Portal-Mount erst clientseitig
-  useEffect(() => { setMounted(true) }, [])
+  // Portal-Mount erst clientseitig + Mobile-Erkennung (Filter-Panel auf Handy via Portal an body)
+  useEffect(() => {
+    setMounted(true)
+    const mq = window.matchMedia('(max-width: 1024px)')
+    const apply = () => setIsMobileView(mq.matches)
+    apply()
+    mq.addEventListener('change', apply)
+    return () => mq.removeEventListener('change', apply)
+  }, [])
 
   // Compare-Bar nur sichtbar solange Autocenter im Blick ist (smoothes Ein-/Ausblenden via CSS-Klasse)
   useEffect(() => {
@@ -492,6 +500,11 @@ export default function Autocenter() {
   }
 
   const PSS = f.powerUnit === 'PS' ? PS_STEPS : KW_STEPS
+
+  // Auf Handy: Filter-Panel an body portalen (entkommt #autocenter overflow/stacking,
+  // sonst auf iOS Safari unsichtbar). Auf Desktop bleibt es als sticky Grid-Sidebar.
+  const portalIfMobile = (node: React.ReactNode) =>
+    mounted && isMobileView ? createPortal(node, document.body) : node
 
   // Compare-Bar verstecken, sobald ein anderes Fenster offen ist (Detail, Probefahrt, Vergleich, Suche, Ankauf)
   const anyModalOpen = !!selectedCar || showProbefahrt || showCompare || showSuche || showAnkauf
@@ -559,6 +572,7 @@ export default function Autocenter() {
           {activeCount > 0 && <span className="vk-filter-count">{activeCount}</span>}
         </button>
 
+        {portalIfMobile(<>
         {filterOpen && <div className="vk-filter-backdrop open" onClick={() => setFilterOpen(false)} />}
 
         {/* ── FILTER PANEL ────────────────────────────────────── */}
@@ -750,6 +764,7 @@ export default function Autocenter() {
 
         </div>{/* end fp-scroll-wrap */}
         </aside>
+        </>)}
 
         {/* ── CARS SECTION ─────────────────────────────────────── */}
         <section className="cars-section">
